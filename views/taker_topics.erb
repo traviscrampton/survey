@@ -1,0 +1,9 @@
+<h1>Pick a Topic that is interesting to you!</h1>
+
+<% @topics.each() do |topic| %>
+
+<ul>
+  <li><a href="/taker/topic/<%= topic.id %>"><%= topic.name() %></a></li>
+</ul>
+
+<% end %>

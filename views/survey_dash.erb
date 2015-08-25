@@ -1,4 +1,4 @@
-<h1>Bienvenid@s</h1>
+<h1><%= @topic.name %></h1>
 
 <h2>Choose a Survey</h2>
 
@@ -20,7 +20,7 @@
       <th></th>
   </thead>
   <tbody>
-    <% @surveys.each() do |survey| %>
+    <% @topic.surveys.each() do |survey| %>
     <tr>
       <td>
         <a href="/surveys/<%= survey.id() %>"><%= survey.title() %></a>
@@ -44,3 +44,5 @@
     </tr>
   </tbody>
 </table>
+
+<a href="/">HOME</a>

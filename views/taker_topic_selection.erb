@@ -1,0 +1,7 @@
+<h1><%= @topic.name %></h1>
+<h2>Available surveys</h2>
+<% @topic.surveys.each() do |survey| %>
+<ul>
+  <li><%= survey.title() %></li>
+</ul>
+<% end %>

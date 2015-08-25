@@ -6,6 +6,7 @@
 
   <label class="form-label" for="description">Survey Question</label>
   <input name="description" type="text" id="description" class="form-control">
+  <br>
   <button type="submit" class="btn btn-info">Add Question</button>
 </div>
 </form>
@@ -18,13 +19,13 @@
       <th></th>
   </thead>
   <tbody>
-    <% @questions.each() do |question| %>
+    <% @survey.questions.each() do |question| %>
     <tr>
       <td>
         <%= question.description() %>
       </td>
       <td>
-        <form id="update_survey" action="/questions/<%= question.id %>" method="post">
+        <form id="update_question" action="/questions/<%= question.id %>" method="post">
           <input type="hidden" name="_method" value="patch">
           <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
             <label for="update_description">Update description</label>
@@ -42,3 +43,7 @@
     </tr>
   </tbody>
 </table>
+
+<a href="/">BACK TO HOMEPAGE</a>
+<br>
+<a href="/topics">BACK TO TOPICS</a>

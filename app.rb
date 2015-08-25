@@ -19,8 +19,7 @@ end
 
 post('/topics/new') do
   name = params.fetch("name")
-  topic = Topic.new(:name => name)
-  topic.save()
+  topic = Topic.create({:name => name})
   redirect("/topics")
 end
 
@@ -47,9 +46,8 @@ end
 
 post('/surveys/new') do
   title = params.fetch("title")
-  survey = Survey.new(:title => title)
-  survey.save()
   topic_id = params.fetch("topic_id")
+  survey = Survey.create({:title => title, :topic_id => topic_id})
   redirect("/topics/#{topic_id}")
 end
 
@@ -78,9 +76,8 @@ end
 
 post('/questions/new') do
   description = params.fetch("description")
-  question = Question.new(:description => description)
-  question.save()
   survey_id = params.fetch("survey_id")
+  question = Question.create({:description => description, :survey_id => survey_id})
   redirect("/surveys/#{survey_id}")
 end
 
@@ -99,4 +96,14 @@ delete('/questions/:id') do
   @questions = Question.all()
   survey_id = params.fetch("survey_id")
   redirect("/surveys/#{survey_id}")
+end
+
+get('/taker') do
+  @topics = Topic.all()
+  erb(:taker_topics)
+end
+
+get('/taker/topic/:id') do
+  @topic = Topic.find(params.fetch("id").to_i())
+  erb(:taker_topic_selection)
 end
