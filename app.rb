@@ -5,6 +5,7 @@ require('sinatra/activerecord')
 require("./lib/question")
 require("./lib/survey")
 require("./lib/topic")
+require("./lib/answer")
 require("pg")
 
 
@@ -106,4 +107,21 @@ end
 get('/taker/topic/:id') do
   @topic = Topic.find(params.fetch("id").to_i())
   erb(:taker_topic_selection)
+end
+
+get('/taker/topic/:id/survey/:id') do
+  @survey = Survey.find(params.fetch("id").to_i())
+  erb(:taker_survey_selection)
+end
+
+post('/survey/take') do
+  survey_id = params.fetch("survey_id").to_i()
+  survey = Survey.find(survey_id)
+
+  survey.questions.each do |question|
+  response = params.fetch("response")
+  question_id = params.fetch("question_id")
+  new_answer = Answer.create({:response => response, :question_id => question_id})
+  end
+  erb(:thanks)
 end

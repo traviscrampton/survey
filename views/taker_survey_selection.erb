@@ -1,0 +1,17 @@
+<h1><%= @survey.title %></h1>
+
+<form action="/survey/take" method="post">
+  <div class="form-group">
+    <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+
+    <% @survey.questions.each() do |question| %>
+    <input id="question_id" name="question_id" type="hidden" value="<%= question.id() %>">
+
+    <label class="form-label" for="response"> <%= question.description() %> </label>
+    <input name="response" type="text" id="response" class="form-control">
+
+    <% end %>
+
+    <button type="submit" class="btn btn-info">Submit Answers</button>
+  </div>
+</form>
