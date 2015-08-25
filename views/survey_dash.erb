@@ -1,23 +1,17 @@
 <h1>Bienvenid@s</h1>
 
-<h2><a href="/survey/new">Create a new survey</a></h2>
-<hr>
-<h2>Current Surveys</h2>
+<h2>Choose a Topic</h2>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Topic</th>
-    </tr>
+      <th>Name</th>
   </thead>
   <tbody>
-    <% @surveys.each() do |survey| %>
+    <% @topics.each() do |topic| %>
     <tr>
       <td>
-        <a href="/survey/<%= survey.id() %>"><%= survey.title() %></a>
-      </td>
-      <td>
-        <a href="/survey/<%= survey.id() %>"><%= survey.topic() %></a>
+        <a href="/topics/<%= topic.id() %>"><%= topic.name() %></a>
       </td>
       <% end %>
     </tr>

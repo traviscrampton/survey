@@ -4,6 +4,7 @@ require('pg')
 require('sinatra/activerecord')
 require('survey')
 require('question')
+require('topic')
 
 ENV['RACK_ENV'] = 'test'
 

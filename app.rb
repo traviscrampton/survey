@@ -4,6 +4,7 @@ also_reload("lib/**/*.rb")
 require('sinatra/activerecord')
 require("./lib/question")
 require("./lib/survey")
+require("./lib/topic")
 require("pg")
 
 
@@ -11,7 +12,7 @@ get('/') do
   erb(:index)
 end
 
-get('/survey') do
-  @surveys = Survey.all()
+get('/topics') do
+  @topics = Topic.all()
   erb(:survey_dash)
 end
