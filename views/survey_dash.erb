@@ -1,18 +1,45 @@
 <h1>Bienvenid@s</h1>
 
-<h2>Choose a Topic</h2>
+<h2>Choose a Survey</h2>
+
+<form action="/surveys/new" method="post">
+  <div class="form-group">
+  <input id="topic_id" name="topic_id" type="hidden" value="<%= @topic.id() %>">
+
+  <label class="form-label" for="title">Survey</label>
+  <input name="title" type="text" id="title" class="form-control">
+  <button type="submit" class="btn btn-info">Add Survey</button>
+</div>
+</form>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Title</th>
+      <th></th>
+      <th></th>
   </thead>
   <tbody>
-    <% @topics.each() do |topic| %>
+    <% @surveys.each() do |survey| %>
     <tr>
       <td>
-        <a href="/topics/<%= topic.id() %>"><%= topic.name() %></a>
+        <a href="/surveys/<%= survey.id() %>"><%= survey.title() %></a>
       </td>
+      <td>
+        <form id="update_survey" action="/surveys/<%= survey.id %>" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input id="topic_id" name="topic_id" type="hidden" value="<%= @topic.id() %>">
+            <label for="update_title">Update title</label>
+            <input type="text" name="update_title" id="update_title">
+            <button type="submit" class="btn btn-info">Update</button>
+          </form>
+      <td><form action = "/surveys/<%= survey.id %>" method="post">
+          <div class="form-group">
+            <input id="topic_id" name="topic_id" type="hidden" value="<%= @topic.id() %>">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form></td>
       <% end %>
     </tr>
   </tbody>
