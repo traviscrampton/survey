@@ -1,6 +1,6 @@
 <h1><%= @survey.title() %></h1>
 
-<form action="/surveys/:id" method="post">
+<form action="/questions/new" method="post">
   <div class="form-group">
   <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
 
@@ -9,3 +9,36 @@
   <button type="submit" class="btn btn-info">Add Question</button>
 </div>
 </form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+  </thead>
+  <tbody>
+    <% @questions.each() do |question| %>
+    <tr>
+      <td>
+        <%= question.description() %>
+      </td>
+      <td>
+        <form id="update_survey" action="/questions/<%= question.id %>" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+            <label for="update_description">Update description</label>
+            <input type="text" name="update_description" id="update_description">
+            <button type="submit" class="btn btn-info">Update</button>
+          </form>
+      <td><form action = "/questions/<%= question.id %>" method="post">
+          <div class="form-group">
+            <input id="survey_id" name="survey_id" type="hidden" value="<%= @survey.id() %>">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </form></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

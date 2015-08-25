@@ -71,6 +71,32 @@ delete('/surveys/:id') do
 end
 
 get("/surveys/:id") do
+  @questions = Question.all()
   @survey = Survey.find(params.fetch('id').to_i())
   erb(:question_add)
+end
+
+post('/questions/new') do
+  description = params.fetch("description")
+  question = Question.new(:description => description)
+  question.save()
+  survey_id = params.fetch("survey_id")
+  redirect("/surveys/#{survey_id}")
+end
+
+patch('/questions/:id') do
+  @questions = Question.all()
+  update_description = params.fetch("update_description")
+  question_to_update = Question.find(params.fetch('id'))
+  question_to_update.update({:description => update_description})
+  survey_id = params.fetch("survey_id")
+  redirect("/surveys/#{survey_id}")
+end
+
+delete('/questions/:id') do
+  @question = Question.find(params.fetch('id').to_i())
+  @question.delete()
+  @questions = Question.all()
+  survey_id = params.fetch("survey_id")
+  redirect("/surveys/#{survey_id}")
 end
