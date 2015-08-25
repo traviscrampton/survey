@@ -1,0 +1,25 @@
+<h1>Bienvenid@s</h1>
+
+<h2><a href="/survey/new">Create a new survey</a></h2>
+<hr>
+<h2>Current Surveys</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Topic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @surveys.each() do |survey| %>
+    <tr>
+      <td>
+        <a href="/survey/<%= survey.id() %>"><%= survey.title() %></a>
+      </td>
+      <td>
+        <a href="/survey/<%= survey.id() %>"><%= survey.topic() %></a>
+      </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
